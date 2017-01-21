@@ -1,5 +1,6 @@
 public class HelloWorld {
     public static String hello(String name) {
-        return null;
+    	String addressee = (name == null || name.isEmpty()) ? "World" : name;
+    	return String.format("Hello, %s!", addressee);
     }
 }
