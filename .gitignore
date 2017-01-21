@@ -1,2 +1,10 @@
 .DS_STORE
 target/
+.gitignore
+java/.metadata
+.classpath
+.gradle/
+.project
+.settings/
+build/
+.recommenders/
