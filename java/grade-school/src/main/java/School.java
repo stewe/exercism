@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,10 +10,10 @@ public class School {
 
 	/**
 	 * 
-	 * @return An unsorted copy of the grade school db.
+	 * @return An immutable version of the possibly unsorted grade school db.
 	 */
 	public Map<Integer, List<String>> db() {
-		return getDb(false);
+		return Collections.unmodifiableMap(db);
 	}
 	
 	public void add(String name, int grade) {
@@ -30,28 +31,12 @@ public class School {
 	}
 	
 	/**
-	 * 
-	 * @return A sorted copy of the grade school db.
+	 * Sorts the db and returns an immutable version of it.
+	 * @return Sorted immutable reference.
 	 */
 	public 	Map<Integer, List<String>> sort() {
-		return getDb(true);
-	}
-	
-	/**
-	 * 
-	 * @param sorted Declares whether the grade lists have to be sorted.
-	 * @return A copy of the grade school db.
-	 */
-	private Map<Integer, List<String>> getDb(boolean sorted) {
-		Map<Integer, List<String>> dbCopy = new HashMap<Integer, List<String>>();
-		for (int grade : db.keySet()) {
-			LinkedList<String> copiedList = new LinkedList<String>(db.get(grade));
-			if (sorted) {
-				copiedList.sort(String::compareTo);
-			}
-			dbCopy.put(grade, copiedList);
-		}
-		return dbCopy;
+		db.values().forEach(list -> list.sort(String::compareTo));
+		return Collections.unmodifiableMap(db);
 	}
 	
 }
