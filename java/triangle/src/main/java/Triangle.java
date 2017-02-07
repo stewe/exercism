@@ -3,6 +3,10 @@ public class Triangle {
 
 	private final TriangleKind kind;
 	
+	public Triangle(int a, int b, int c) throws TriangleException {
+		this((double) a, (double) b, (double) c);
+	}
+	
 	public Triangle(double a, double b, double c) throws TriangleException {
 		if (a <= 0 || b <= 0 || c <= 0
 				|| a+b <= c || a+c <= b || b+c <= a) {
